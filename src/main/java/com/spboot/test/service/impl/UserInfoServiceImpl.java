@@ -43,14 +43,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userInfo;
 	}
 
-	@Override
-	public UserInfo match(UserInfo ui) {
-		log.info("tmp=>{}", ui);
-		UserInfo userInfo = uiRepo.findByUserNameAndUserDateOfBirthAndUserPhoneAndUserEmail(ui.getUserName(),
-				ui.getUserDateOfBirth(), ui.getUserPhone(), ui.getUserEmail());
-		log.info("tmp=>{}", userInfo);
-		return userInfo;
-	}
 
 	@Override
 	public UserInfo saveUserPwd(UserInfo userInfo) {

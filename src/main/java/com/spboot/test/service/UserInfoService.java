@@ -11,7 +11,7 @@ public interface UserInfoService {
 	UserInfo getUser(int userNum);
 	UserInfo login(UserInfo ui);
 	UserInfo findId(UserInfo ui);
-	UserInfo match(UserInfo ui); //이메일용
+	
 	Integer saveUserInfo(UserInfo ui);
 	Integer updateUserInfo(UserInfo userInfo);
 	int deleteUserInfo(UserInfo ui);
