@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-  <title>Eterna Bootstrap Template - Index</title>
+  <title>EZENPLAY</title>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="description">
@@ -54,6 +54,6 @@ margin: auto;
 
 
 </body>
-<jsp:include page="/WEB-INF/views/customercenter/star.jsp"></jsp:include><!-- 별-->
+<!-- <jsp:include page="/WEB-INF/views/customercenter/star.jsp"></jsp:include><!-- 별-->
 <script src="/resources/js/review.js"></script><!-- 리뷰리스트와인서트 -->
 </html>
