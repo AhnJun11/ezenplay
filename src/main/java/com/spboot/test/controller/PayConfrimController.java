@@ -25,19 +25,21 @@ public class PayConfrimController {
 	}
 	
 	public static void main(String[] args) {
-		IamportClient client = new IamportClient("3037516194226791", "oSuI7sXtwgb4oPfiiuvVhu4vG3kIXKylD34Lv1e2iq7GgmZyRut9YyEFBYnyJWUnZY9vZnyiOGY42XCU");
+		IamportClient client = new IamportClient("7058661524372059", "04TnbAqUEYKjFUUTldEDfdygCxnTnConGhLSScMwaxQPrKIMYnqeAZudwR7UtvhaM32FfPbpn2eONXBL");
 		try {
-			IamportResponse<Payment> response= client.paymentByImpUid("imp_496383648913");
+			IamportResponse<Payment>response = client.paymentByImpUid("imp_722498104022");
 			Payment payment = response.getResponse();
 			log.info("payment=>{}",payment.getAmount());
-			if(!payment.getAmount().equals(new BigDecimal(1100))) { //long으로도 처리가안되는숫자,엄청큰숫자
-				CancelData cd = new CancelData("imp_496383648913",true);
+			if(!payment.getAmount().equals(new BigDecimal(1500))) {
+				CancelData cd = new CancelData("imp_722498104022",true);
 				IamportResponse<Payment> cPayment = client.cancelPaymentByImpUid(cd);
 				log.info("cancel=>{}",cPayment.getResponse().getCancelAmount());
 			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IamportResponseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -18,7 +18,8 @@
 <link rel="stylesheet" href="/resources/css/timecharge.css">
 </head>
 <body>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <div style="margin:30px auto;">
 
   <div class="container group">
@@ -275,7 +276,7 @@ function charge() {
 	var price = document.getElementById("priceArea");
 	if(pay.value=="카드"){
 		var IMP = window.IMP;
-		IMP.init('imp92849282');
+		IMP.init('imp04912824');
 		IMP.request_pay({
 		    pg : 'inicis', // version 1.1.0부터 지원.
 		    pay_method : 'card',
@@ -303,7 +304,7 @@ function charge() {
 	else if(pay.value=="휴대폰"){
 
 		var IMP = window.IMP;
-		IMP.init('imp92849282');
+		IMP.init('imp04912824');
 		IMP.request_pay({
 		    pg : 'inicis', // version 1.1.0부터 지원.
 		    pay_method : 'phone',
