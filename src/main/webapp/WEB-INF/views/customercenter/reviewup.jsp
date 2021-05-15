@@ -20,7 +20,7 @@
                   <div class="validate"></div>
                 </div>
               </div>
-              <jsp:include page="/WEB-INF/views/customercenter/star.jsp"></jsp:include><!-- 별-->
+              <!-- <jsp:include page="/WEB-INF/views/customercenter/star.jsp"></jsp:include><!-- 별-->
               <div class="form-group">
                 <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"    />
                 <div class="validate"></div>

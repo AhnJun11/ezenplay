@@ -7,10 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
-//github.com/cwyoon75/aws-ezenplay.git
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-//github.com/cwyoon75/aws-ezenplay.git
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,17 +49,7 @@ public class UserInfoController {
 		}
 		return userInfo;
 	}
-	@PostMapping("/matchemail")
-	public @ResponseBody UserInfo match(@RequestBody UserInfo ui) {
-		UserInfo userInfo = uService.match(ui);
-		log.info("atoservice=>{}",userInfo);
-		if (userInfo == null) {
-			return null;
-		}
 
-			return userInfo;
-		
-	}
 
 	@PostMapping("/login")
 	public @ResponseBody UserInfo login(@RequestBody UserInfo ui, HttpServletRequest req) {

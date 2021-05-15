@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 
@@ -47,9 +46,6 @@
 									이름 : <input type="text" class="form-text" id='userName' ></input>
 									생년월일 : <input type="date" class="form-text" id='userDateOfBirth' ></input>
 									전화번호 : <input type="text" class="form-text" id='userPhone' ></input>
-									이메일 : <input type="email" class="form-text" id='userEmail'></input><button  id="sendEmail" onclick="middlechack();">인증번호받기</button>
-									<br/>
-									인증번호 : <input type="email" class="form-text" id='scrnum' ></input><button  id="chackNum" onclick="chackNums()">인증번호확인</button>
 									</div>
 									<button class="btn btn-secondary" id="hidebtn">찾기</button>
 								</div>
@@ -77,7 +73,7 @@
 													<h5 class="mb-0">
 														<a id="idtext2" data-toggle="collapse" data-parent="#accordion"
 														href="#collapseOne" aria-expanded="true"
-														aria-controls="collapseOne"> </a>
+														aria-controls="collapseOne"> Entire Venue </a>
 													</h5>
 									<label for="campaignName">변경하실 비밀번호를 입력하세요</label><br>
 									아이디 : <input type="text" class="form-text" id='userId' name="idput" value="" readonly></input>
@@ -111,93 +107,9 @@
 
 
 </body>
-<script> 
-var mailchack = '';
-var chackbtn = false;
-var chacknumbtn = false;
-var echack = false;
-var sendemail = document.getElementById('sendemail');
-var chackNum = document.getElementById('chackNum');
-function middlechack(){
-	var userName = document.querySelector('#userName').value;
-	var userDateOfBirth = document.querySelector('#userDateOfBirth').value;
-	var userPhone = document.querySelector('#userPhone').value;
-	var userEmail = document.getElementById('userEmail').value;
-	var userpack={
-			userName,userDateOfBirth,userPhone,userEmail
-	}////////////
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/matchemail');
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			if(xhr.responseText ==""){
-				alert('회원정보가 일치하지 않습니다.');
-				return false;
-			
-			}else{
-				alert('이메일 수신에 몇 분 정도 소요될 수 있습니다.');
-				echack = true;
-				sendEmail.disabled = 'disabled';
-				sendEmails();
-			}
-		}
-	}
-	xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-	xhr.send(JSON.stringify(userpack));
-}
-
-function sendEmails(){ //메일 전송로직//////////////////////////
-
-	var userEmail = document.getElementById('userEmail').value;
-	var subject = '인증번호 확인용 메일입니다.';
-	var text = '고구마';
-	var to = userEmail;
-	var emailmaster={
-			to,text,subject
-	}
-	/////////////
-	var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/mail'); 
-		xhr.onreadystatechange = function(){
-			if (xhr.readyState == 4 && xhr.status == 200) {
-			if(xhr.responseText && xhr.responseText!=null){
-				mailchack = xhr.responseText;
-				alert('전송완료');
-			}
-		}
-	}	
-	if(userEmail == "" || !echack){
-    alert("본인확인용 번호를 받을 메일을 정확히 입력하세요.")
-    return false;
-    	}else{	
-    		chackbtn = true;
-		xhr.setRequestHeader('content-type', 'application/json;charset=UTF-8');
-		xhr.send(JSON.stringify(emailmaster));
-       }
-}
-function chackNums(){// 인증번호 확인로직
- 	var scrnum =  document.getElementById('scrnum').value;
- 	if (!chackbtn){
- 		alert("본인확인용 메일을 발송후 작성하세요");
- 	}
- 	var testj = JSON.parse(mailchack);
- 	var tests = testj.code;
- 	if(scrnum ==null || tests !== scrnum){
- 		alert("올바른 인증번호를 입력하세요");
- 		return false;
- 	}else{
-		alert("본인인증을 완료했습니다.");
-		chacknumbtn =true;
-		chackNum.disabled = 'disabled';
- 	}
-	//var xhr = new XMLHttpRequest();
-	//xhr.open('POST', '/chacknum'); 
-}
-</script>
 <script> //각 버튼 숨기고 보이기, id찾기
 window.onload =function(){
 	$("#pwdchange").css({ 'pointer-events': 'none' });
-	
 	var hide = document.getElementById('hidebtn');
 	var hide2 = document.getElementById('hidebtn2');
 	var open = document.getElementById('openbtn');
@@ -207,7 +119,6 @@ window.onload =function(){
 	var resulttext = document.getElementById("resulttext");
 	var hidetext2 = document.getElementById("hidetext2");
 	var resulttext2 = document.getElementById("resulttext2");
-	
 	findp.onclick =function(){//아이디를 찾은 후 비밀번호찾기로 탭이동
 		
 		$('#tabtest').click();
@@ -219,13 +130,10 @@ window.onload =function(){
 		location.href = '/';
 	}
 	hide.onclick =function (){//아이디 찾기화면 로직
+		
 		var userName = document.querySelector('#userName').value;
 		var userDateOfBirth = document.querySelector('#userDateOfBirth').value;
 		var userPhone = document.querySelector('#userPhone').value;
-		var userEmail = document.querySelector('#userEmail').value;
-		var sendEmail = document.querySelector('#sendEmail').value;
-		var scrnum = document.querySelector('#scrnum').value;
-		
 		 if(userName == ""){
              alert("본인 이름을 입력하세요.")
              userName.value="";
@@ -243,27 +151,10 @@ window.onload =function(){
         
              return false;
          }
-		 if(userEmail == ""){
-             alert("인증번호를 받을 메일을 정확히 입력하세요.")
-        
-             return false;
-         }
-		 if(scrnum == ""){
-             alert("인증번호를 정확히 입력하세요.")
-        
-             return false;
-         }
-		 if(!chacknumbtn){
-				alert('수신하신 인증번호로 중복확인후 진행하세요');
-				return false;
-			}
-		
-		 
-		///////////////////////////////////
 		hidetext.style.display = 'none'; //인풋숨기기
 		resulttext.style.display = 'block'; //결과보이기
 		var ndp = {
-				userName,userDateOfBirth,userPhone
+				userName,userDateOfBirth,userPhone,
 		}
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', '/findId');
@@ -272,14 +163,16 @@ window.onload =function(){
 				var html = '';
 				var html2 = '';
 				if (xhr.responseText) {
+				
 					var res = JSON.parse(xhr.responseText); 
+			
 					html += '<p class="form-text">찾으시는 ID는'+res.userId+'입니다.</p>';
 					html2 += '<p class="form-text">찾으셨던 ID는'+res.userId+'입니다.</p>';
 					var ui = res.userId;
 				}else{//넘어온게 널일때 나올것
 					alert('없는 계정입니다.')
-					hidetext.style.display = 'block'; //다시인풋보이게
-					resulttext.style.display = 'none'; //결과안보이게
+					hidetext.style.display = 'block'; //인풋숨기기
+					resulttext.style.display = 'none'; //결과보이기
 				}
 				document.querySelector('#idtext').innerHTML=html;
 				document.querySelector('#idtext2').innerHTML=html2;
@@ -320,7 +213,7 @@ window.onload =function(){
 		xhr.open('POST', '/updatepwd');
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
-				if(xhr.responseText && xhr.responseText!=null){
+				if(x.responseText && x.responseText!=null){
 					
 					alert('등록완료');
 					location.href='/';
